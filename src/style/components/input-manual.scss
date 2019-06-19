@@ -1,0 +1,9 @@
+.input-manual {
+  max-height: 30vh;
+  overflow: auto;
+  margin-bottom: .75rem;
+  
+  .field .field {
+    margin-bottom: 0;
+  }
+}
