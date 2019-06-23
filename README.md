@@ -1,7 +1,7 @@
 # Minter Multisend
 
 ## For humans
-* Download latest release here
+* Download [latest release](https://github.com/minterscan/minter_multisend/releases)
 * Open index.html in your browser
 * Enjoy
 
