@@ -1,6 +1,11 @@
 # Minter Multisend
 
-## Project setup
+## For humans
+* Download latest release here
+* Open index.html in your browser
+* Enjoy
+
+## For developers
 ```
 npm install
 ```
