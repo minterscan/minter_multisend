@@ -3,7 +3,7 @@
     <div class="field">
       <button 
         class="button is-success" 
-        @click="send()"
+        @click="submit()"
         :disabled="!dataStore.wallet || isControlsDisabled"
       >
         Send
@@ -26,6 +26,21 @@ const minterSDK = new Minter({ apiType: 'node', baseURL: config.mainnetUrl })
   name: 'Submit'
 })
 export default class SendSubmit extends Mixins(Getters) {
+  protected submit() {
+    this.$dialog.confirm({
+        title: 'Send coins',
+        message: `Are you sure that data is correct?`,
+        confirmText: 'Set',
+        type: 'is-warning',
+        hasIcon: true,
+        icon: 'exclamation-triangle',
+        iconPack: 'fa',
+        onConfirm: () => {
+          this.send()
+        }
+    })
+  }
+
   protected async send() {
     try {
       this.dataStore.commitHash(null)
