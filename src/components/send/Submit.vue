@@ -26,22 +26,12 @@ const minterSDK = new Minter({ apiType: 'node', baseURL: config.mainnetUrl })
   name: 'Submit'
 })
 export default class SendSubmit extends Mixins(Getters) {
-  protected async getNonce(): Promise<number|void> {
-    return mainnet.get(`/address?address=${this.address}`)
-      .then((response: AxiosResponse) => Number(response.data.result.transaction_count) + 1)
-      .catch((e: Error) => {
-        this.dataStore.commitError(e)
-      })
-  }
-
   protected async send() {
     try {
       this.dataStore.commitHash(null)
       this.dataStore.commitError(null)
       this.uiStore.commitIsLoading(true)
-      const nonce =  await this.getNonce()
       const txParams = new MultisendTxParams({
-          // nonce,
           chainId: 1,
           privateKey: this.dataStore.privateKey,
           list: this.dataStore.validTxData,
