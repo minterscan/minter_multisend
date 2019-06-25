@@ -1,5 +1,5 @@
 export default {
   explorerBaseUrl: 'https://minterscan.net',
-  mainnetUrl: 'https://minter-node-1.testnet.minter.network',
+  mainnetUrl: 'https://minterscan.pro/explorer',
   explorerApiBaseUrl: 'https://explorer-api.minter.network/api/v1'
 }
