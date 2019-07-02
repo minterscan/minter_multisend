@@ -11,7 +11,7 @@
             class="input" 
             type="text" 
             placeholder="Address" 
-            v-model="txData.to"
+            v-model.trim="txData.to"
             :class="{
               'is-info': isInvalidAddress(txData.to)
             }"
