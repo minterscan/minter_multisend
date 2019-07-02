@@ -42,10 +42,14 @@ export default class InputImport extends Mixins(Getters) {
 
   protected parseCsvRow(row: string): ITxData {
     const rawData = row.split(',')
+    const to = rawData[0] && rawData[0].trim() || ''
+    const value = +rawData[1] || 0
+    const coin = rawData[2] && rawData[2].trim() || ''
+
     return {
-      to: rawData[0],
-      value: +rawData[1] || 0,
-      coin: rawData[2]
+      to,
+      value,
+      coin
     }
   }
 }
