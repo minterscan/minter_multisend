@@ -13,7 +13,7 @@
             placeholder="Address" 
             v-model.trim="txData.to"
             :class="{
-              'is-info': isInvalidAddress(txData.to)
+              'is-danger': isInvalidAddress(txData.to)
             }"
           >
         </p>
@@ -24,7 +24,7 @@
             placeholder="Amount" 
             v-model.number="txData.value"
             :class="{
-              'is-info': isInvalidValue(txData.value)
+              'is-danger': isInvalidValue(txData.value)
             }"
           >
         </p>
