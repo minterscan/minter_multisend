@@ -3,7 +3,11 @@
     <div class="start is-size-6">
       <data-reset-button />
       <input-mode-button />
-      <span><b>{{ dataStore.validTxData.length }}</b>&nbsp;addresses</span>
+      <span :class="{
+        'has-text-danger': dataStore.validTxData.length > config.addressesLimit
+      }">
+        <b>{{ dataStore.validTxData.length }} / {{ config.addressesLimit }}</b>&nbsp;addresses
+      </span>
       <payload-switch />
       <span>Fee:&nbsp;<b>{{ dataStore.fee | toFixed(3) }}</b> BIP</span>
     </div>

@@ -4,7 +4,7 @@
       <button 
         class="button is-success" 
         @click="submit()"
-        :disabled="!dataStore.wallet || isControlsDisabled"
+        :disabled="!dataStore.wallet || isControlsDisabled || dataStore.validTxData.length > config.addressesLimit"
       >
         Send
       </button>
