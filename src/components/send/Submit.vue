@@ -30,7 +30,7 @@ export default class SendSubmit extends Mixins(Getters) {
     this.$dialog.confirm({
         title: 'Send coins',
         message: `Are you sure that data is correct?`,
-        confirmText: 'Set',
+        confirmText: 'Send',
         type: 'is-warning',
         hasIcon: true,
         icon: 'exclamation-triangle',
