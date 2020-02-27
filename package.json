@@ -1,6 +1,7 @@
 {
   "name": "minter_multisend",
-  "version": "0.1.0",
+  "description": "Minter multisend tool",
+  "version": "0.2.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -11,7 +12,7 @@
     "buefy": "^0.7.7",
     "bulma": "^0.7.5",
     "core-js": "^2.6.5",
-    "minter-js-sdk": "^0.16.2",
+    "minter-js-sdk": "^0.21.0",
     "minterjs-wallet": "^3.0.3",
     "safe-buffer": "^5.1.2",
     "vue": "^2.6.10",
@@ -25,6 +26,7 @@
     "@vue/cli-service": "^3.8.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
+    "serialize-javascript": ">=2.1.1",
     "typescript": "^3.4.3",
     "vue-template-compiler": "^2.6.10"
   }
