@@ -24,6 +24,8 @@
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-typescript": "^3.8.0",
     "@vue/cli-service": "^3.8.0",
+    "acorn": ">=6.4.1",
+    "minimist": ">=1.2.2",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
     "serialize-javascript": ">=2.1.1",
