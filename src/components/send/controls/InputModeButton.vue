@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Import mode -->
     <button 
       title="Import"
       v-if="uiStore.isInputModeManual"
@@ -11,6 +12,8 @@
         <i class="fas fa-file-import"></i>
       </span>
     </button>
+
+    <!-- Manual mode -->
     <button
       title="Manual"
       v-if="uiStore.isInputModeImport"

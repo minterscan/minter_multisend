@@ -1,4 +1,5 @@
 <template>
+  <!-- Add row to multisend list -->
   <button
     @click="addDataRow()"
     class="button is-outlined is-success"
@@ -18,6 +19,7 @@ import { Component, Mixins } from 'vue-property-decorator'
   name: 'DataAddButton'
 })
 export default class DataAddButton extends Mixins(Getters) {
+  // Push empty row to store
   protected addDataRow() {
     this.dataStore.commitTxDataPushEmpty()
   }

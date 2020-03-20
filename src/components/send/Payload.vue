@@ -1,5 +1,6 @@
 <template>
   <div class="payload" v-if="uiStore.isPayload">
+    <!-- Payload field -->
     <textarea 
       rows="3"
       class="textarea" 
@@ -16,11 +17,13 @@ import { Component, Mixins, Watch } from 'vue-property-decorator'
 export default class SendPayload extends Mixins(Getters) {
   protected payload: string = ''
 
+  // Set payload to store on field change
   @Watch('payload')
   protected onPayloadChange(payload: string) {
     this.dataStore.commitPayload(payload)
   }
 
+  // Reset payload on payload switcher toggle
   @Watch('uiStore.isPayload')
   protected onIsPayloadChange(value: boolean) {
     if (!value) { this.payload = '' }

@@ -1,15 +1,31 @@
 <template>
   <section class="section send">
     <div class="container">
+      <!-- Control buttons -->
       <controls />
+
+      <!-- If no transaction hash —> show form -->
       <template v-if="dataStore.hash === null">
+        <!-- Manual input form -->
         <input-manual />
+
+        <!-- Import CSV form -->
         <input-import />
+
+        <!-- Payload field -->
         <payload />
+
+        <!-- Loading indicator -->
         <b-loading :is-full-page="false" :active.sync="uiStore.isLoading" :can-cancel="false"></b-loading>
       </template>
+
+      <!-- Success transaction message -->
       <send-success />
+
+      <!-- Error transaction message -->
       <send-error />
+
+      <!-- Submit button -->
       <submit />
     </div>
   </section>
@@ -44,6 +60,7 @@ const FEE_UNIT = 0.001
   }
 })
 export default class Send extends Mixins(Getters) {
+  // Change coin for each item in multisend list on master coin change
   @Watch('dataStore.masterCoin')
   protected onMasterCoinChange(coin: string) {
     this.dataStore.txData.map((txData: ITxData, index: number) => {
@@ -53,6 +70,7 @@ export default class Send extends Mixins(Getters) {
     })
   }
 
+  // Recalculate fee on list / payload change
   @Watch('dataStore.payload')
   @Watch('dataStore.txData', { deep: true })
   protected onTxDataChange() {
@@ -66,8 +84,8 @@ export default class Send extends Mixins(Getters) {
     this.dataStore.commitFee(fee)
   }
 
+  // Load coins from API before mount
   protected beforeMount() {
-    // Load coins from API
     explorer.get('/coins')
       .then((response: AxiosResponse) => {
         const coins = response.data && response.data.data
@@ -84,6 +102,7 @@ export default class Send extends Mixins(Getters) {
       })
   }
 
+  // Reset form
   protected reset() {
     this.dataStore.dispatchReset()
   }

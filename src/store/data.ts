@@ -73,20 +73,28 @@ class DataStore extends VuexModule {
     this.txData = txData
   }
 
+  // Add empty item to multisend list
+
   @Mutation
   public commitTxDataPushEmpty() {
     this.txData.push({ ...EMPTY_TX_DATA })
   }
+
+  // Change coin for ALL addresses
 
   @Mutation
   public commitTxDataCoinChange(data: { coin: string; index: number }) {
     this.txData[data.index].coin = data.coin
   }
 
+  // Remove address from list
+
   @Mutation
   public commitTxDataRemove(index: number) {
     this.txData.splice(index, 1)
   }
+
+  // Reset form data
 
   @Mutation
   public commitTxDataReset() {

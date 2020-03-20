@@ -1,5 +1,6 @@
 <template>
   <div class="notification" v-if="dataStore.error">
+    <!-- Error message -->
     <p v-if="dataStore.error" class="has-text-danger">
       {{ dataStore.error.message }}
     </p>

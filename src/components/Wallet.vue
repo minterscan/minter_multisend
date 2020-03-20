@@ -6,10 +6,12 @@
         <p v-if="!dataStore.error && !dataStore.wallet">
           Enter mnemonic phrase or private key
         </p>
+
         <!-- Wallet -->
         <p v-if="dataStore.wallet">
           Wallet: <a :href="addressUrl" target="_blank" class="has-text-info">{{ address }}</a>
         </p>
+
         <!-- Loading -->
         <b-loading :is-full-page="false" :active.sync="uiStore.isLoading" :can-cancel="false"></b-loading>
       </div>
@@ -29,16 +31,22 @@ export default class Wallet extends Mixins(Getters) {
     return `${config.explorerBaseUrl}/address/${this.address}`
   }
 
+  // Enable loading indicator on Seed / PK change
+
   @Watch('dataStore.mnemonic')
   @Watch('dataStore.privateKey')
   protected onProviderChange(value: string) {
     if (value) { this.uiStore.commitIsLoading(true) }
   }
 
+  // Disable loading indicator if Seed / PK is correct
+
   @Watch('dataStore.wallet')
   protected onWalletChange(value: IWallet | null) {
     if (value) { this.uiStore.commitIsLoading(false) }
   }
+
+  // Disable loading indicator on Seed / PK error
 
   @Watch('dataStore.error')
   protected onErrorChange(value: Error | null) {

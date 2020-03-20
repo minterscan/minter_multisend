@@ -26,6 +26,7 @@ const minterSDK = new Minter({ apiType: 'node', baseURL: config.mainnetUrl })
   name: 'Submit'
 })
 export default class SendSubmit extends Mixins(Getters) {
+  // Show modal dialog
   protected submit() {
     this.$dialog.confirm({
         title: 'Send coins',
@@ -41,6 +42,7 @@ export default class SendSubmit extends Mixins(Getters) {
     })
   }
 
+  // Send transaction
   protected async send() {
     try {
       this.dataStore.commitHash(null)

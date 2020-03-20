@@ -1,8 +1,12 @@
 <template>
   <div id="app">
+    <!-- Logo -->
     <logo />
+    <!-- Seed phrase / private key -->
     <login-providers />
+    <!-- Link to Explorer -->
     <wallet />
+    <!-- Send form -->
     <send />
   </div>
 </template>

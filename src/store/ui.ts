@@ -18,15 +18,21 @@ class UiStore extends VuexModule {
     return this.inputMode === EInputMode.Import
   }
 
+  // Toggle payload field visibility
+
   @Mutation
   public commitIsPayload(value: boolean) {
     this.isPayload = value
   }
 
+  // Toggle loading indicator
+
   @Mutation
   public commitIsLoading(value: boolean) {
     this.isLoading = value
   }
+
+  // Toggle input mode (manual/import)
 
   @Mutation
   public commitInputMode(inputMode: EInputMode) {

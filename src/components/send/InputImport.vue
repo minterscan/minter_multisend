@@ -5,6 +5,7 @@
       <b>address</b>,<b>amount</b>,<b>coin</b>. 
       Data should be comma-separated, each item on new line
     </p>
+    <!-- CSV field -->
     <p>
       <textarea 
         rows="5"
@@ -29,17 +30,20 @@ import { Component, Mixins, Watch } from 'vue-property-decorator'
 export default class InputImport extends Mixins(Getters) {
   protected csv: string = ''
 
+  // Parse data on field change
   @Watch('csv')
   protected onCsvChange() {
     this.parseCsv()
   }
 
+  // Parse loop
   protected parseCsv() {
     const rows = this.csv.split('\n')
     const txData = rows.map(this.parseCsvRow)
     this.dataStore.commitTxData(txData)
   }
 
+  // Parse CSV row
   protected parseCsvRow(row: string): ITxData {
     const rawData = row.split(',')
     const to = rawData[0] && rawData[0].trim() || ''

@@ -1,4 +1,5 @@
 <template>
+  <!-- Master coin select -->
   <div class="select">
     <select v-model="masterCoin" :disabled="isControlsDisabled">
       <option v-for="(coin, i) in dataStore.coins" :key="i">{{ coin }}</option>
@@ -16,6 +17,7 @@ import { Component, Mixins, Watch } from 'vue-property-decorator'
 export default class CoinSelect extends Mixins(Getters) {
   protected masterCoin: string = 'BIP'
 
+  // Show modal dialog on master coin change
   @Watch('masterCoin')
   protected onMasterCoinChange(masterCoin: string) {
     this.$dialog.confirm({

@@ -1,4 +1,5 @@
 <template>
+  <!-- Reset multisend list button -->
   <button 
     @click="resetData()"
     class="button is-outlined is-danger" 
@@ -18,6 +19,7 @@ import { Component, Mixins } from 'vue-property-decorator'
   name: 'DataResetButton'
 })
 export default class DataResetButton extends Mixins(Getters) {
+  // Show modal dialog
   protected resetData() {
     this.$dialog.confirm({
         title: 'Reset data',

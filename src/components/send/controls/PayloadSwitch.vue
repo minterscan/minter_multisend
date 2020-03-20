@@ -1,4 +1,5 @@
 <template>
+  <!-- Payload switcher -->
   <b-switch v-model="isPayload" type="is-info" :disabled="isControlsDisabled">
     message
   </b-switch>
@@ -14,6 +15,7 @@ import { Component, Mixins, Watch } from 'vue-property-decorator'
 export default class PayloadSwitch extends Mixins(Getters) {
   protected isPayload: boolean = false
 
+  // Toggle payload mode on switcher change
   @Watch('isPayload')
   protected onIsPayloadChange(value: boolean) {
     this.uiStore.commitIsPayload(value)

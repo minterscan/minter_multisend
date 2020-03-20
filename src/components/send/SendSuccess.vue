@@ -1,5 +1,6 @@
 <template>
   <div class="notification" v-if="dataStore.hash">
+    <!-- Link to explorer -->
     <button class="delete" @click="close"></button>
     Tx: <a
       target="_blank"
@@ -17,6 +18,7 @@ import { Component, Vue, Mixins, Watch } from 'vue-property-decorator'
 
 @Component
 export default class SendSuccess extends Mixins(Getters) {
+  // Reset on close
   protected close() {
     this.dataStore.commitHash(null)
   }

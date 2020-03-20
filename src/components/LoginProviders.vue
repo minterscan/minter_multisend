@@ -1,6 +1,7 @@
 <template>
   <section class="section providers">
     <div class="container">
+      <!-- Toggle provider buttons -->
       <div class="buttons has-addons is-centered">
         <button 
           class="button"
@@ -18,6 +19,8 @@
           <span>{{ provider.title }}</span>
         </button>
       </div>
+
+      <!-- Fields -->
       <div class="field has-addons">
         <!-- Menemonic Field -->
         <p class="control is-expanded">
@@ -28,6 +31,7 @@
             placeholder="Mnemonic Phrase"
             v-if="activeProvider === 'mnemonic'"
           >
+
           <!-- Private Key Field -->
           <input 
             class="input"
@@ -104,16 +108,19 @@ export default class LoginProviders extends Mixins(Getters) {
     )
   }
 
+  // Reset fields on provider type change
   @Watch('activeProvider')
   protected onActiveProviderChange() {
     this.mnemonic = ''
     this.privateKey = ''
   }
 
+  // Set provider type
   protected setActiveProvider(name: string) {
     this.activeProvider = name
   }
 
+  // Set Seed phrase to store
   protected setMnemonic() {
     this.dataStore.commitError(null)
     this.dataStore.commitMnemonic(this.mnemonic)
@@ -129,6 +136,7 @@ export default class LoginProviders extends Mixins(Getters) {
     }, 100)
   }
 
+  // Set PK to store
   protected setPrivateKey() {
     this.dataStore.commitError(null)
     this.dataStore.commitPrivateKey(this.privateKey)
@@ -144,6 +152,7 @@ export default class LoginProviders extends Mixins(Getters) {
     }, 100 )
   }
 
+  // Reset
   protected clear() {
     this.mnemonic = ''
     this.privateKey = ''
