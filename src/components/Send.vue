@@ -62,7 +62,7 @@ const FEE_UNIT = 0.001
 export default class Send extends Mixins(Getters) {
   // Change coin for each item in multisend list on master coin change
   @Watch('dataStore.masterCoin')
-  protected onMasterCoinChange(coin: string) {
+  protected onMasterCoinChange(coin: number) {
     this.dataStore.txData.map((txData: ITxData, index: number) => {
       if (this.dataStore.txData[index]) {
         this.dataStore.commitTxDataCoinChange({ coin, index })
@@ -88,10 +88,12 @@ export default class Send extends Mixins(Getters) {
   protected beforeMount() {
     explorer.get('/coins')
       .then((response: AxiosResponse) => {
-        const coins = response.data && response.data.data
-        const coinsSymbols = coins
+        const coinsSymbols = response.data.data
           .map((coin: ICoin) => {
-            return coin.symbol
+            return {
+              id: coin.id,
+              symbol: coin.symbol
+            }
           })
           .sort()
 

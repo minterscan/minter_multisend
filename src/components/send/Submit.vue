@@ -4,7 +4,7 @@
       <button 
         class="button is-success" 
         @click="submit()"
-        :disabled="!dataStore.wallet || isControlsDisabled || dataStore.validTxData.length > config.addressesLimit"
+        :disabled="invalid"
       >
         Send
       </button>
@@ -17,7 +17,7 @@ import config from '@/config'
 import Getters from '@/mixins/Getters'
 import mainnet from '@/services/mainnet'
 import { AxiosError, AxiosResponse } from 'axios'
-import { Minter, MultisendTxParams } from 'minter-js-sdk'
+import { Minter, TX_TYPE, prepareTx, makeSignature } from 'minter-js-sdk'
 import { Component, Mixins } from 'vue-property-decorator'
 
 const minterSDK = new Minter({ apiType: 'node', baseURL: config.mainnetUrl })
@@ -26,19 +26,27 @@ const minterSDK = new Minter({ apiType: 'node', baseURL: config.mainnetUrl })
   name: 'Submit'
 })
 export default class SendSubmit extends Mixins(Getters) {
+  get invalid(): boolean {
+    return (
+      !this.dataStore.wallet ||
+      this.isControlsDisabled ||
+      !this.dataStore.validTxData.length ||
+      this.dataStore.validTxData.length > config.addressesLimit
+    )
+  }
   // Show modal dialog
   protected submit() {
     this.$dialog.confirm({
-        title: 'Send coins',
-        message: `Are you sure that data is correct?`,
-        confirmText: 'Send',
-        type: 'is-warning',
-        hasIcon: true,
-        icon: 'exclamation-triangle',
-        iconPack: 'fa',
-        onConfirm: () => {
-          this.send()
-        }
+      title: 'Send coins',
+      message: `Are you sure that data is correct?`,
+      confirmText: 'Send',
+      type: 'is-warning',
+      hasIcon: true,
+      icon: 'exclamation-triangle',
+      iconPack: 'fa',
+      onConfirm: () => {
+        this.send()
+      }
     })
   }
 
@@ -48,19 +56,18 @@ export default class SendSubmit extends Mixins(Getters) {
       this.dataStore.commitHash(null)
       this.dataStore.commitError(null)
       this.uiStore.commitIsLoading(true)
-      const txParams = new MultisendTxParams({
-          chainId: 1,
-          privateKey: this.dataStore.privateKey,
-          list: this.dataStore.validTxData,
-          feeCoinSymbol: 'BIP',
-          message: this.dataStore.payload,
-          signatureType: 1,
-          type: '0x0D'
-      })
 
-      minterSDK.postTx(txParams)
-        .then((hash: string) => {
-          this.dataStore.commitHash(hash)
+      const txParams = {
+        type: TX_TYPE.MULTISEND,
+        data: {
+          list: this.dataStore.validTxData
+        },
+        message: this.dataStore.payload
+      }
+
+      minterSDK.postTx(txParams, { privateKey: `0x${this.dataStore.privateKey}` })
+        .then((data: { hash: string }) => {
+          this.dataStore.commitHash(data.hash)
           this.uiStore.commitIsLoading(false)
         })
         .catch((e: AxiosError) => {

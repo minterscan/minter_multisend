@@ -17,10 +17,11 @@ export interface ILoginProvider {
 export interface ITxData {
   to: string
   value: number
-  coin?: string
+  coin?: number
 }
 
 export interface ICoin {
+  id: number
   crr: number
   volume: number
   reserve_balance: string

@@ -2,7 +2,7 @@
   <div class="input-import" v-if="uiStore.isInputModeImport">
     <p class="notification">
       CSV format: 
-      <b>address</b>,<b>amount</b>,<b>coin</b>. 
+      <b>address</b>, <b>amount</b>, <b>coin symbol</b>. 
       Data should be comma-separated, each item on new line
     </p>
     <!-- CSV field -->
@@ -10,9 +10,9 @@
       <textarea 
         rows="5"
         class="textarea" 
-        placeholder="Mx...001,1,BIP
-Mx...002,2,BIP
-Mx...003,3,BIP
+        placeholder="Mx...001,1,0
+Mx...002,2,0
+Mx...003,3,0
         " 
         v-model="csv" />
     </p>
@@ -48,7 +48,7 @@ export default class InputImport extends Mixins(Getters) {
     const rawData = row.split(',')
     const to = rawData[0] && rawData[0].trim() || ''
     const value = +rawData[1] || 0
-    const coin = rawData[2] && rawData[2].trim() || ''
+    const coin = +rawData[2].trim() || 0
 
     return {
       to,

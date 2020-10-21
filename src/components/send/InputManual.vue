@@ -42,7 +42,7 @@
             }"
           >
             <select v-model="txData.coin">
-              <option v-for="(coin, i) in dataStore.coins" :key="i">{{ coin }}</option>
+              <option v-for="(coin, i) in dataStore.coins" :key="i" :value="coin.id">{{ coin.symbol }}</option>
             </select>
           </div>
         </div>

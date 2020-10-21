@@ -1,4 +1,4 @@
-import { IWallet, ITxData } from '@/typings'
+import { IWallet, ITxData, ICoin } from '@/typings'
 import {
   Module,
   VuexModule,
@@ -9,7 +9,7 @@ import {
 const ADDRESS_REGEX = /^Mx([A-Fa-f0-9]{40})$/gi
 const EMPTY_TX_DATA = {
   to: '',
-  coin: 'BIP',
+  coin: 0,
   value: 0
 }
 
@@ -31,7 +31,7 @@ class DataStore extends VuexModule {
 
   get validTxData(): ITxData[] {
     return this.txData.filter((data: ITxData) => {
-      return data.to.match(ADDRESS_REGEX) && !isNaN(data.value) && data.coin
+      return data.to.match(ADDRESS_REGEX) && !isNaN(data.value)
     })
   }
 
@@ -83,7 +83,7 @@ class DataStore extends VuexModule {
   // Change coin for ALL addresses
 
   @Mutation
-  public commitTxDataCoinChange(data: { coin: string; index: number }) {
+  public commitTxDataCoinChange(data: { coin: number; index: number }) {
     this.txData[data.index].coin = data.coin
   }
 
