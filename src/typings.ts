@@ -20,12 +20,17 @@ export interface ITxData {
   coin?: number
 }
 
-export interface ICoin {
+export interface INetworkCoin {
   id: number
   crr: number
   volume: number
   reserve_balance: string
   name: string
+  symbol: string
+}
+
+export interface ICoin {
+  id: number
   symbol: string
 }
 

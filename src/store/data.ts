@@ -1,4 +1,4 @@
-import { IWallet, ITxData, ICoin } from '@/typings'
+import { IWallet, ITxData, ICoin, INetworkCoin } from '@/typings'
 import {
   Module,
   VuexModule,
@@ -24,7 +24,10 @@ class DataStore extends VuexModule {
   public hash: string | null = null
   public error: Error | null = null
   public masterCoin: string = 'BIP'
-  public coins: string[] = ['BIP']
+  public coins: ICoin[] = [{
+    id: 0,
+    symbol: 'BIP'
+  }]
   public fee: number = 0
   public payload: string = ''
   public txData: ITxData[] = [{ ...EMPTY_TX_DATA }]
@@ -55,7 +58,7 @@ class DataStore extends VuexModule {
   // Coins
 
   @Mutation
-  public commitCoins(coins: string[]) {
+  public commitCoins(coins: ICoin[]) {
     this.coins = coins
   }
 

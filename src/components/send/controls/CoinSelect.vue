@@ -1,7 +1,7 @@
 <template>
   <!-- Master coin select -->
   <div class="select">
-    <select v-model="masterCoin" :disabled="isControlsDisabled">
+    <select v-model="masterCoinId" :disabled="isControlsDisabled">
       <option v-for="(coin, i) in dataStore.coins" :value="coin.id" :key="i">{{ coin.symbol }}</option>
     </select>
   </div>
@@ -15,14 +15,20 @@ import { Component, Mixins, Watch } from 'vue-property-decorator'
   name: 'CoinSelect'
 })
 export default class CoinSelect extends Mixins(Getters) {
-  protected masterCoin = 0
+  protected masterCoinId = 0
+
+  get masterCoinSymbol(): string {
+    const coin = this.dataStore.coins.find((item) => item.id === this.masterCoinId)
+
+    return coin?.symbol || 'BIP'
+  }
 
   // Show modal dialog on master coin change
-  @Watch('masterCoin')
-  protected onMasterCoinChange(masterCoin: string) {
+  @Watch('masterCoinId')
+  protected onMasterCoinIdChange(masterCoin: string) {
     this.$dialog.confirm({
         title: 'Set coin to all data',
-        message: `Are you sure you want to set <b>${masterCoin}</b> as coin to all data?`,
+        message: `Are you sure you want to set <b>${this.masterCoinSymbol}</b> as coin to all data?`,
         confirmText: 'Set',
         type: 'is-warning',
         hasIcon: true,

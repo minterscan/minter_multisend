@@ -11,7 +11,9 @@
       <span :class="{
         'has-text-danger': dataStore.validTxData.length > config.addressesLimit
       }">
-        <b>{{ dataStore.validTxData.length }} / {{ config.addressesLimit }}</b>&nbsp;addresses
+        <b>{{ dataStore.validTxData.length }} / {{ config.addressesLimit }}</b>
+        &nbsp;
+        addresses
       </span>
 
       <!-- Payload switcher -->
