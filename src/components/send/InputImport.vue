@@ -2,7 +2,7 @@
   <div class="input-import" v-if="uiStore.isInputModeImport">
     <p class="notification">
       CSV format: 
-      <b>address</b>, <b>amount</b>, <b>coin symbol</b>. 
+      <b>address</b>, <b>amount</b>, <b>coin ID</b>. 
       Data should be comma-separated, each item on new line
     </p>
     <!-- CSV field -->
