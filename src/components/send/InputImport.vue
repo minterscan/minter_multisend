@@ -40,15 +40,16 @@ export default class InputImport extends Mixins(Getters) {
   protected parseCsv() {
     const rows = this.csv.split('\n')
     const txData = rows.map(this.parseCsvRow)
+
     this.dataStore.commitTxData(txData)
   }
 
   // Parse CSV row
   protected parseCsvRow(row: string): ITxData {
     const rawData = row.split(',')
-    const to = rawData[0] && rawData[0].trim() || ''
+    const to = rawData[0] && rawData[0]?.trim() || ''
     const value = +rawData[1] || 0
-    const coin = +rawData[2].trim() || 0
+    const coin = +rawData[2]?.trim() || 0
 
     return {
       to,

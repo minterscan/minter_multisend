@@ -71,11 +71,8 @@ export default class SendSubmit extends Mixins(Getters) {
           this.uiStore.commitIsLoading(false)
         })
         .catch((e: AxiosError) => {
-          if (e.response && e.response.data.error.data) {
-            return this.dataStore.commitError(new Error(e.response.data.error.data))
-          }
-          if (e.response && e.response.data.error.tx_result) {
-            return this.dataStore.commitError(new Error(e.response.data.error.tx_result.message))
+          if (e.response && e.response.data.error.message) {
+            return this.dataStore.commitError(new Error(e.response.data.error.message))
           }
 
           const error = e.response ? e.response.data : e
