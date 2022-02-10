@@ -27,7 +27,7 @@
     "@vue/cli-service": "^4.5.8",
     "acorn": ">=6.4.1",
     "minimist": ">=1.2.2",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "sass-loader": "^7.1.0",
     "serialize-javascript": "^5.0.1",
     "typescript": "^3.4.3",
